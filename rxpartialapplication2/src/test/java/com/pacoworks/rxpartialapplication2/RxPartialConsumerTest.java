@@ -1,5 +1,5 @@
 
-package com.pacoworks.rxpartialapplication;
+package com.pacoworks.rxpartialapplication2;
 
 import org.junit.Assert;
 import org.junit.Test;

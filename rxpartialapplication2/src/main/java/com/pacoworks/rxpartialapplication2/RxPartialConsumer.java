@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.pacoworks.rxpartialapplication;
+package com.pacoworks.rxpartialapplication2;
 
 import hu.akarnokd.rxjava2.functions.Consumer3;
 import hu.akarnokd.rxjava2.functions.Consumer4;
