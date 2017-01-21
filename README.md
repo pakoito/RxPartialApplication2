@@ -65,7 +65,7 @@ repositories {
     
 dependencies {
     ...
-    compile 'com.github.pakoito:RxPartialApplication:1.1.0'
+    compile 'com.github.pakoito:RxPartialApplication2:1.0.0'
     ...
 }
 ```
@@ -81,8 +81,8 @@ or to your `pom.xml`
 
 <dependency>
     <groupId>com.github.pakoito</groupId>
-    <artifactId>RxPartialApplication</artifactId>
-    <version>1.1.0</version>
+    <artifactId>RxPartialApplication2</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
