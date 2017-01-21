@@ -16,14 +16,14 @@ int result = multiplyBy100.call(5); // result == 500
 
 Single parameter applicator:
 ```java
-Action1<String> salutator = RxPartialConsumer.apply(applicator(), (String parameter) -> { System.out.println("Hello, " + parameter); } );
+Consumer<String> salutator = RxPartialConsumer.apply(applicator(), (String parameter) -> { System.out.println("Hello, " + parameter); } );
 salutator.call("pakoito"); // prints "Hello, pakoito"
-Action1<Integer> duplicator = RxPartialFunction.apply(applicator(), (int parameter) -> { System.out.println("Double of parameter is " + 2 * parameter); } );
+Consumer<Integer> duplicator = RxPartialFunction.apply(applicator(), (int parameter) -> { System.out.println("Double of parameter is " + 2 * parameter); } );
 duplicator.call(2); // prints "Double of parameter is 4"
 
 ...
 
-public static <T> Action2<Action1<T>, T> applicator() {
+public static <T> BiConsumer<Action1<T>, T> applicator() {
     return (Action1<T> action, T parameter) -> { action.call(parameter); };
 }
 ```
@@ -35,7 +35,7 @@ updatesFromDatabaseObservable().filter(isMe).map(toUser()).subscribe(/* ... */);
 
 ...
 
-public static <T, U> Function2<T, U, Boolean> equalsFilter() {
+public static <T, U> BiFunction<T, U, Boolean> equalsFilter() {
     return (T first, U second) -> { return first.equals(second); };
 }
 ```
