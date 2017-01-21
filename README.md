@@ -2,7 +2,7 @@
 
 RxPartialApplication is a library to allow [partial application](https://en.wikipedia.org/wiki/Partial_application) on RxJava function primitives.
 
-For the RxJava 1.X version please go to [RxPartialApplication](https://github.com/pakoito/RxPartialApplication)
+For the RxJava 1.X version please go to [RxPartialApplication](https://github.com/pakoito/RxPartialApplication).
 
 ##Usage
 
