@@ -6,11 +6,11 @@ For the RxJava 1.X version please go to [RxPartialApplication](https://github.co
 
 ##Usage
 
-RxPartialApplication2 contains two classes, `RxPartialConsumer` and `RxPartialFunction`. Each contains a set of `apply()` (apply parameters from left to right) and `applyEnd()` (apply parameters from right to left) methods to do partial application from any ActionN and FuncN to any type of a lower arity. For example, you can partially apply a Func6 object with 3 prefilled parameters to obtain a Func3 object to be reused.
+RxPartialApplication2 contains two classes, `RxPartialConsumer` and `RxPartialFunction`. Each contains a set of `apply()` (apply parameters from left to right) and `applyEnd()` (apply parameters from right to left) methods to do partial application from any ConsumerN and FunctionN to any type of a lower arity. For example, you can partially apply a Function6 object with 3 prefilled parameters to obtain a Function3 object to be reused.
 
 Function to multiply numbers by 100:
 ```java
-Func1<Integer, Integer> multiplyBy100 = RxPartialFunction.apply((int first, int second) -> { return first * second; }, 100);
+Function<Integer, Integer> multiplyBy100 = RxPartialFunction.apply((int first, int second) -> { return first * second; }, 100);
 int result = multiplyBy100.call(5); // result == 500
 ```
 
@@ -30,12 +30,12 @@ public static <T> Action2<Action1<T>, T> applicator() {
 
 Filter only myself:
 ```java
-Func1<Object, Boolean> isMe = RxPartialFunction.apply(equalsFilter(), myUser);
+Function<Object, Boolean> isMe = RxPartialFunction.apply(equalsFilter(), myUser);
 updatesFromDatabaseObservable().filter(isMe).map(toUser()).subscribe(/* ... */);
 
 ...
 
-public static <T, U> Func2<T, U, Boolean> equalsFilter() {
+public static <T, U> Function2<T, U, Boolean> equalsFilter() {
     return (T first, U second) -> { return first.equals(second); };
 }
 ```
@@ -43,7 +43,7 @@ public static <T, U> Func2<T, U, Boolean> equalsFilter() {
 You can also partially apply from the last parameter using `applyEnd()`
 
 ```java
-Func1<String, Observable<String>>> requestForUrl = 
+Function<String, Observable<String>>> requestForUrl =
         RxPartialFunction.applyEnd(this::doNetworkRequest(), localDataStorage, ServerInfo.default(), RetrofitRequest.getInstance());
 
 requestForUrl.call("http://www.mycompany.com/api/users").subscribe(/* ... */);
