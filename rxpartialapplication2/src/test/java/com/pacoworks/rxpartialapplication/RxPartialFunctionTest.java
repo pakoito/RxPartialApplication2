@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 import io.reactivex.functions.Function3;
 import io.reactivex.functions.Function6;
 import io.reactivex.functions.Function9;
@@ -31,12 +32,11 @@ public class RxPartialFunctionTest {
     @Test
     public void apply() throws Exception {
         List<Function3> functions = Observable
-                .fromArray(RxPartialFunction.apply(ACTION_6, 1, 2, 3).getClass().getInterfaces())
+                .fromArray(RxPartialFunction.apply(ACTION_6, 1, 2, 3))
                 .ofType(Function3.class).toList().blockingGet();
         Assert.assertEquals(1, functions.size());
         List<Callable> callables = Observable
-                .fromArray(RxPartialFunction.apply(ACTION_9, 1, 2, 3, 4, 5, 6, 7, 8, 9).getClass()
-                        .getInterfaces())
+                .fromArray(RxPartialFunction.apply(ACTION_9, 1, 2, 3, 4, 5, 6, 7, 8, 9))
                 .ofType(Callable.class).toList().blockingGet();
         Assert.assertEquals(1, callables.size());
     }
@@ -44,13 +44,12 @@ public class RxPartialFunctionTest {
     @Test
     public void applyEnd() throws Exception {
         List<Function3> functions = Observable
-                .fromArray(RxPartialFunction.applyEnd(ACTION_6, 1, 2, 3).getClass().getInterfaces())
+                .fromArray(RxPartialFunction.applyEnd(ACTION_6, 1, 2, 3))
                 .ofType(Function3.class).toList().blockingGet();
         Assert.assertEquals(1, functions.size());
-        List<Callable> callables = Observable
-                .fromArray(RxPartialFunction.applyEnd(ACTION_9, 1, 2, 3, 4, 5, 6, 7, 8).getClass()
-                        .getInterfaces())
-                .ofType(Callable.class).toList().blockingGet();
+        List<Function> callables = Observable
+                .fromArray(RxPartialFunction.applyEnd(ACTION_9, 1, 2, 3, 4, 5, 6, 7, 8))
+                .ofType(Function.class).toList().blockingGet();
         Assert.assertEquals(1, callables.size());
     }
 }
