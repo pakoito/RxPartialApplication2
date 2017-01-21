@@ -6,19 +6,19 @@ For the RxJava 1.X version please go to [RxPartialApplication](https://github.co
 
 ##Usage
 
-RxPartialApplication2 contains two classes, `RxPartialAction` and `RxPartialFunc`. Each contains a set of `apply()` (apply parameters from left to right) and `applyEnd()` (apply parameters from right to left) methods to do partial application from any ActionN and FuncN to any type of a lower arity. For example, you can partially apply a Func6 object with 3 prefilled parameters to obtain a Func3 object to be reused.
+RxPartialApplication2 contains two classes, `RxPartialConsumer` and `RxPartialFunction`. Each contains a set of `apply()` (apply parameters from left to right) and `applyEnd()` (apply parameters from right to left) methods to do partial application from any ActionN and FuncN to any type of a lower arity. For example, you can partially apply a Func6 object with 3 prefilled parameters to obtain a Func3 object to be reused.
 
 Function to multiply numbers by 100:
 ```java
-Func1<Integer, Integer> multiplyBy100 = RxPartialFunc.apply((int first, int second) -> { return first * second; }, 100);
+Func1<Integer, Integer> multiplyBy100 = RxPartialFunction.apply((int first, int second) -> { return first * second; }, 100);
 int result = multiplyBy100.call(5); // result == 500
 ```
 
 Single parameter applicator:
 ```java
-Action1<String> salutator = RxPartialAction.apply(applicator(), (String parameter) -> { System.out.println("Hello, " + parameter); } );
+Action1<String> salutator = RxPartialConsumer.apply(applicator(), (String parameter) -> { System.out.println("Hello, " + parameter); } );
 salutator.call("pakoito"); // prints "Hello, pakoito"
-Action1<Integer> duplicator = RxPartialFunc.apply(applicator(), (int parameter) -> { System.out.println("Double of parameter is " + 2 * parameter); } );
+Action1<Integer> duplicator = RxPartialFunction.apply(applicator(), (int parameter) -> { System.out.println("Double of parameter is " + 2 * parameter); } );
 duplicator.call(2); // prints "Double of parameter is 4"
 
 ...
@@ -30,7 +30,7 @@ public static <T> Action2<Action1<T>, T> applicator() {
 
 Filter only myself:
 ```java
-Func1<Object, Boolean> isMe = RxPartialFunc.apply(equalsFilter(), myUser);
+Func1<Object, Boolean> isMe = RxPartialFunction.apply(equalsFilter(), myUser);
 updatesFromDatabaseObservable().filter(isMe).map(toUser()).subscribe(/* ... */);
 
 ...
@@ -44,7 +44,7 @@ You can also partially apply from the last parameter using `applyEnd()`
 
 ```java
 Func1<String, Observable<String>>> requestForUrl = 
-        RxPartialFunc.applyEnd(this::doNetworkRequest(), localDataStorage, ServerInfo.default(), RetrofitRequest.getInstance());
+        RxPartialFunction.applyEnd(this::doNetworkRequest(), localDataStorage, ServerInfo.default(), RetrofitRequest.getInstance());
 
 requestForUrl.call("http://www.mycompany.com/api/users").subscribe(/* ... */);
 
