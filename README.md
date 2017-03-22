@@ -1,10 +1,10 @@
-#RxPartialApplication2
+# RxPartialApplication2
 
 RxPartialApplication is a library to allow [partial application](https://en.wikipedia.org/wiki/Partial_application) on RxJava function primitives.
 
 For the RxJava 1.X version please go to [RxPartialApplication](https://github.com/pakoito/RxPartialApplication).
 
-##Usage
+## Usage
 
 RxPartialApplication2 contains two classes, `RxPartialConsumer` and `RxPartialFunction`. Each contains a set of `apply()` (apply parameters from left to right) and `applyEnd()` (apply parameters from right to left) methods to do partial application from any ConsumerN and FunctionN to any type of a lower arity. For example, you can partially apply a Function6 object with 3 prefilled parameters to obtain a Function3 object to be reused.
 
@@ -53,7 +53,7 @@ Observable<String> doNetworkRequest(String url, DataStorage storage, ServerInfor
 }
 ```
 
-##Distribution
+## Distribution
 
 Add as a dependency to your `build.gradle`
 ```groovy
@@ -86,7 +86,7 @@ or to your `pom.xml`
 </dependency>
 ```
 
-##License
+## License
 
 Copyright (c) pakoito 2017
 
